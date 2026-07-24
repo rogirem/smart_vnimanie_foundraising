@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фонд "Внимание" - Сохраним историческое наследие России</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="/sitevnimanie/images/logo_black.svg" alt="Фонд Внимание" class="logo-img">
+                </div>
+                <nav class="nav">
+                        <a href="#projects" class="nav-link">Проекты</a>
+                        <a href="https://fondvnimanie.ru/news" target="_blank" class="nav-link">Новости</a>
+                        <a href="https://fondvnimanie.ru/about" target="_blank" class="nav-link">О нас</a>
+                        <a href="#donate" class="nav-link">Поддержать нас</a>
+                        <a href="#leaderboard" class="nav-link">Топ доноров</a>
+                        <a href="#donations-history" class="nav-link">История донатов</a>
+                </nav>
+                <div class="wallet-connect">
+                    <button id="connectWalletBtn" class="btn btn-outline">Подключить кошелек</button>
+                    <button id="manualWalletBtn" class="btn btn-outline manual-wallet-btn" style="display:none;">Ввести адрес вручную</button>
+                    <span id="walletAddress" class="wallet-address"></span>
+                    <div id="manualWalletInput" class="manual-wallet-input" style="display:none;">
+                        <input type="text" id="manualAddressInput" class="form-control manual-address-input" placeholder="0x..." maxlength="42">
+                        <button id="saveManualAddress" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Главный баннер -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Сохраним историческое наследие России</h1>
+                <p class="hero-description">
+                    «Внимание» — некоммерческая организация по сохранению исторического наследия в России. 
+                    Оказывает помощь в сборе средств на сохранение и воссоздание исторических архитектурных объектов, 
+                    обеспечивает бесплатную консультационную помощь, развивает культуру бережного отношения к историческому наследию.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalRaised">0</div>
+                        <div class="stat-label">Собрано ETH</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalGoal">0</div>
+                        <div class="stat-label">Цель</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="activeProjects">0</div>
+                        <div class="stat-label">Активных проектов</div>
+                    </div>
+                </div>
+                <a href="#projects" class="btn btn-primary">Поддержать проекты</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Активные проекты -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <h2 class="section-title">Активные проекты</h2>
+            <div id="projectsList" class="projects-grid">
+                <!-- Проекты загружаются динамически -->
+                <div class="loading">Загрузка проектов...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Форма пожертвования -->
+    <section id="donate" class="donate-section">
+        <div class="container">
+            <h2 class="section-title">Поддержать фонд</h2>
+            <div class="donate-form-container">
+                <form id="donateForm" class="donate-form">
+                    <div class="form-group">
+                        <label for="projectSelect">Выберите проект:</label>
+                        <div class="select-wrapper">
+                            <select id="projectSelect" class="form-control select-animated" required>
+                                <option value="">Загрузка проектов...</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="amount">Сумма пожертвования (ETH):</label>
+                        <input type="number" id="amount" class="form-control" step="0.001" min="0.001" value="0.01" required>
+                        <small class="form-help">Минимальная сумма: 0.001 ETH. По умолчанию: 0.01 ETH</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="firstName">Имя (необязательно):</label>
+                        <input type="text" id="firstName" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName">Фамилия (необязательно):</label>
+                        <input type="text" id="lastName" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="isAnonymous">
+                            <span>Остаться анонимным</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" id="donateBtn">
+                        Сделать пожертвование
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Топ доноров -->
+    <section id="leaderboard" class="leaderboard-section">
+        <div class="container">
+            <h2 class="section-title">Топ доноров</h2>
+            <div id="leaderboardList" class="leaderboard-table">
+                <!-- Лидерборд загружается динамически -->
+                <div class="loading">Загрузка лидерборда...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- История пожертвований -->
+    <section id="donations-history" class="donations-history-section">
+        <div class="container">
+            <h2 class="section-title">История пожертвований</h2>
+            <div class="donations-controls">
+                <button id="refreshDonationsBtn" class="btn btn-outline">Обновить</button>
+                <select id="donationsLimit" class="form-control" style="width: auto; display: inline-block; margin-left: 10px;">
+                    <option value="50">Последние 50</option>
+                    <option value="100">Последние 100</option>
+                    <option value="200">Последние 200</option>
+                    <option value="500">Все</option>
+                </select>
+            </div>
+            <div id="donationsHistoryList" class="donations-history-table">
+                <!-- История загружается динамически -->
+                <div class="loading">Загрузка истории...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Информация о контракте -->
+    <section id="contract-info" class="contract-info-section">
+        <div class="container">
+            <h2 class="section-title">Информация о смарт-контракте</h2>
+            <div id="contractInfo" class="contract-info-card">
+                <div class="loading">Загрузка информации...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="/sitevnimanie/images/logo_desk_white.svg" alt="Фонд Внимание">
+                </div>
+                <div class="footer-info">
+                    <p>© 2024 Фонд "Внимание". Все права защищены.</p>
+                    <p>Связь: mail@fondvnimanie.ru</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно для успешного пожертвования -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Спасибо за ваше пожертвование!</h2>
+            <p id="successMessage"></p>
+            <div id="transactionHash" class="transaction-hash"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
+
