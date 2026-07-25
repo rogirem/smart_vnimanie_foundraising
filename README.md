@@ -31,7 +31,7 @@
 
 ## Демо
 
-[![Демо "Внимание"]]([https://youtu.be/ВАШ_ID](https://youtu.be/P5EVBHrzi3k))
+▶ https://youtu.be/P5EVBHrzi3k
 ## Полезные команды
 
 ```bash
