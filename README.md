@@ -27,92 +27,6 @@
 | Блокчейн | Solidity, Truffle, Ganache |
 | База данных | MySQL |
 
-## Структура репозитория
-
-```
-├── contracts/          # Смарт-контракты Solidity
-├── migrations/         # Скрипты деплоя Truffle
-├── public/             # Фронтенд (HTML, CSS, JS)
-├── sitevnimanie/       # Логотипы и ассеты фонда «Внимание»
-├── build/              # Скомпилированные артефакты контрактов
-├── server.js           # Express-сервер и REST API
-├── database.sql        # Схема базы данных
-├── truffle-config.js   # Конфигурация Truffle
-└── view-donations-*.js # Утилиты просмотра донатов (БД / блокчейн)
-```
-
-## Быстрый старт
-
-### 1. Установка зависимостей
-
-```bash
-npm install
-npm install -g truffle
-```
-
-### 2. База данных MySQL
-
-```bash
-mysql -u root -p < database.sql
-```
-
-### 3. Переменные окружения
-
-Скопируйте `.env.example` в `.env` и заполните значения:
-
-```bash
-cp .env.example .env
-```
-
-```env
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=your_password
-DB_NAME=fondvnimanie
-PORT=3000
-CONTRACT_ADDRESS=
-FACTORY_ADDRESS=
-```
-
-### 4. Локальный блокчейн
-
-Запустите [Ganache](https://trufflesuite.com/ganache/) на порту `8545` (Chain ID: `1337`).
-
-### 5. Деплой смарт-контракта
-
-```bash
-npm run compile
-npm run migrate
-```
-
-Скопируйте адрес контракта из вывода команды и укажите его в `.env` как `CONTRACT_ADDRESS`.
-
-### 6. Запуск сервера
-
-```bash
-npm start
-```
-
-Откройте в браузере: [http://localhost:3000](http://localhost:3000)
-
-## Настройка MetaMask
-
-1. Добавьте сеть Ganache:
-   - **Название:** Ganache Local
-   - **RPC URL:** `http://127.0.0.1:8545`
-   - **Chain ID:** `1337`
-   - **Валюта:** ETH
-2. Импортируйте тестовый аккаунт из Ganache для отправки донатов.
-
-## API
-
-| Метод | Эндпоинт | Описание |
-|-------|----------|----------|
-| GET | `/api/projects` | Список проектов и прогресс сбора |
-| GET | `/api/donations` | История пожертвований |
-| GET | `/api/leaderboard` | Топ доноров |
-| GET | `/api/contract-info` | Адрес и ABI контракта |
-| POST | `/api/donations/sync` | Синхронизация доната из блокчейна в БД |
 
 ## Полезные команды
 
@@ -122,10 +36,3 @@ npm run view-donations-db    # Просмотр донатов в MySQL
 npm run view-donations-bc    # Просмотр донатов в блокчейне
 ```
 
-## Лицензия
-
-MIT
-
----
-
-*Демо-проект создан в рамках демонстрации возможностей криптофандрайзинга для [фонда «Внимание»](https://fondvnimanie.ru).*
